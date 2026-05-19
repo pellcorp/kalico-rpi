@@ -588,7 +588,10 @@ stepcompress_find_past_position(struct stepcompress *sc, uint64_t clock)
 {
     int64_t last_position = sc->last_position;
     struct history_steps *hs;
-    list_for_each_entry(hs, &sc->history_list, node) {
+    struct history_steps *v;
+    int i = 0;
+    list_for_each_entry_safe(hs, v, &sc->history_list, node) {
+        i++;
         if (clock < hs->first_clock) {
             last_position = hs->start_position;
             continue;

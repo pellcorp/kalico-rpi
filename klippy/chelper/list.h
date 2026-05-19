@@ -11,7 +11,7 @@
  ****************************************************************/
 
 struct list_node {
-    struct list_node *next, *prev;
+    volatile struct list_node *next, *prev;
 };
 
 struct list_head {
@@ -47,6 +47,7 @@ list_del(struct list_node *n)
 {
     struct list_node *prev = n->prev;
     struct list_node *next = n->next;
+    n->next = (void*)0xdeadbeef;
     next->prev = prev;
     prev->next = next;
 }
@@ -54,9 +55,9 @@ list_del(struct list_node *n)
 static inline void
 __list_add(struct list_node *n, struct list_node *prev, struct list_node *next)
 {
-    next->prev = n;
     n->next = next;
     n->prev = prev;
+    next->prev = n;
     prev->next = n;
 }
 
