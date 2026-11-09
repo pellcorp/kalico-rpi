@@ -11,5 +11,5 @@ make
 if [ "$1" = "btteddy" ]; then
   mv out/klipper.uf2 fw/rpi/btteddy.uf2
 else
-  echo "$1 not supported"
+  mv out/klipper.bin fw/rpi/$1.bin
 fi
