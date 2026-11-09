@@ -9,7 +9,7 @@ mkdir -p outfw/
 make clean
 make
 if [ "$1" = "btteddy" ]; then
-  mv out/klipper.uf2 fw/rpi/btteddy.uf2
+  mv out/klipper.uf2 outfw/btteddy.uf2
 else
-  mv out/klipper.bin fw/rpi/$1.bin
+  mv out/klipper.bin outfw/${1}.bin
 fi
